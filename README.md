@@ -1,85 +1,93 @@
-<div align="center">
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
+  <img src="https://img.shields.io/badge/PyTorch-1.12+-EE4C2C?style=flat&logo=pytorch&logoColor=white" alt="PyTorch">
+  <img src="https://img.shields.io/badge/CUDA-11.6+-76B900?style=flat&logo=nvidia&logoColor=white" alt="CUDA">
+  <img src="https://img.shields.io/badge/License-MIT-97CA00?style=flat&logo=open-source-initiative&logoColor=white" alt="License">
+</p>
+
+<h1 align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)">
+    <img src="Arch.png" alt="PRFusion" width="75%">
+  </picture>
+</h1>
 
 ```
-██████╗ ██████╗ ███████╗██╗   ██╗███████╗██╗ ██████╗ ███╗   ██╗
-██╔══██╗██╔══██╗██╔════╝██║   ██║██╔════╝██║██╔═══██╗████╗  ██║
-██████╔╝██████╔╝█████╗  ██║   ██║███████╗██║██║   ██║██╔██╗ ██║
-██╔═══╝ ██╔══██╗██╔══╝  ██║   ██║╚════██║██║██║   ██║██║╚██╗██║
-██║     ██║  ██║██║     ╚██████╔╝███████║██║╚██████╔╝██║ ╚████║
-╚═╝     ╚═╝  ╚═╝╚═╝      ╚═════╝ ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═══╝
-</div>
-
-<div align="center">
-
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║                                                                              ║
-║          Progressive RWKV-based Fusion Network for                           ║
-║          Multi-Modal Medical Image Fusion                                    ║
+║                              ██████╗ ██████╗ ███████╗                        ║
+║                              ██╔══██╗██╔══██╗██╔════╝                        ║
+║                              ██████╔╝██████╔╝█████╗                          ║
+║                              ██╔═══╝ ██╔══██╗██╔══╝                          ║
+║                              ██║     ██║  ██║██║                             ║
+║                              ╚═╝     ╚═╝  ╚═╝╚═╝                             ║
 ║                                                                              ║
-║   [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)]()            ║
-║   [![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-ee4c2c.svg)]()       ║
-║   [![CUDA](https://img.shields.io/badge/CUDA-11.6+-76b900.svg)]()             ║
-║   [![License](https://img.shields.io/badge/License-MIT-green.svg)]()          ║
+║              Progressive RWKV-based Fusion Network for                       ║
+║              Multi-Modal Medical Image Fusion                                ║
 ║                                                                              ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
-
-</div>
-
----
-
-> 📄 This work has been submitted to **Applied Soft Computing (ASOC)**.
-
----
-
-## Architecture
+```
 
 <div align="center">
-  <img src="Arch.png" alt="PRFusion Architecture" width="85%">
+
+> 📄 Submitted to **Applied Soft Computing** (ASOC) — Under Review
+
 </div>
 
 ---
 
 ## Overview
 
-PRFusion is a multi-modal medical image fusion framework for **CT-MRI**, **PET-MRI**, and **SPECT-MRI** tasks. It supports standard training with 5-fold cross-validation and few-shot experiments.
+PRFusion is a deep learning framework for multi-modal medical image fusion, covering **CT-MRI**, **PET-MRI**, and **SPECT-MRI** tasks. It supports full training with 5-fold cross-validation as well as few-shot experiments.
 
 ---
 
 ## Quick Start
 
-### Install
+### Installation
 
 ```bash
+git clone https://github.com/CaiCy6/PRFusion.git
+cd PRFusion
 pip install -r requirements.txt
 ```
 
-> CUDA WKV kernels are compiled on first run (`nvcc` required).
+> 🔧 The CUDA WKV kernel compiles automatically on first run (`nvcc` required).
 
-### Dataset
+### Dataset Preparation
+
+Download the [Harvard Medical Image Fusion Dataset](https://www.med.harvard.edu/AANLIB/home.html) and organize as:
 
 ```
 Havard-Medical-Image-Fusion-Datasets-main/
-├── CT-MRI/   {CT/*.png, MRI/*.png}
-├── PET-MRI/  {PET/*.png, MRI/*.png}
-└── SPECT-MRI/{SPECT/*.png, MRI/*.png}
+├── CT-MRI/
+│   ├── CT/        (*.png)
+│   └── MRI/       (*.png)
+├── PET-MRI/
+│   ├── PET/       (*.png)
+│   └── MRI/       (*.png)
+└── SPECT-MRI/
+    ├── SPECT/     (*.png)
+    └── MRI/       (*.png)
 ```
 
-### Train
+### Training
 
 ```bash
 python train.py \
     --model_name PRFusion \
     --method PRFusion \
     --exp_name CT-MRI \
-    --data_dir /path/to/dataset \
+    --data_dir /path/to/Havard-Medical-Image-Fusion-Datasets-main \
     --epochs 50 --batch_size 4 --gpu 0
 ```
 
-**Models:** `MACTFusion` | `PRFusion` | `PRFusionA1` ~ `PRFusionA4`
+| Option | Choices |
+|:-------|:--------|
+| `--model_name` | `MACTFusion` \| `PRFusion` \| `PRFusionA1` ~ `PRFusionA4` |
+| `--exp_name`   | `CT-MRI` \| `PET-MRI` \| `SPECT-MRI` |
 
-**Datasets:** `CT-MRI` | `PET-MRI` | `SPECT-MRI`
-
-### Test
+### Testing
 
 ```bash
 python test.py \
@@ -108,23 +116,24 @@ python shotTrainTest.py \
 
 ```
 PRFusion/
-├── Arch.png                     # Architecture diagram
+├── Arch.png
 ├── README.md
 ├── requirements.txt
-├── train.py                     # Training with 5-fold CV
+├── train.py                     # 5-fold CV training
 ├── test.py                      # Evaluation & metrics
 ├── shotTrainTest.py             # Few-shot training + testing
 ├── dataset.py                   # Data loader
-├── loss.py                      # Fusion loss
-├── eval_metrics.py              # Evaluation metrics
-├── logger.py                    # Logging
-├── Fusionnet.py                 # MACTFusion model
-├── CrossMaxvit.py               # Vision backbone
-├── Maxvit.py                    # Vision backbone
+├── loss.py                      # Fusion loss functions
+├── eval_metrics.py              # MI, SSIM, PSNR, VIF, Qabf, SCD
+├── logger.py
+├── Fusionnet.py                 # MACTFusion baseline
+├── CrossMaxvit.py               # MaxViT cross-attention blocks
+├── Maxvit.py                    # MaxViT blocks
 ├── Networks/
 │   ├── FusionNet.py             # PRFusion (proposed)
 │   ├── OursA1.py ~ OursA4.py    # Ablation variants
-│   └── OursFusionNet/           # RWKV 2D blocks & CUDA kernels
+│   └── OursFusionNet/           # RWKV 2D modules & CUDA kernels
+│       └── cuda/                # WKV forward/backward operators
 └── scripts/
     ├── train.sh
     ├── train_ablation.sh
@@ -137,14 +146,17 @@ PRFusion/
 
 | Argument | Default | Description |
 |:---------|:-------:|:------------|
-| `--model_name` | MACTFusion | Model selection |
-| `--exp_name` | SPECT-MRI | Dataset / task |
-| `--data_dir` | required | Dataset root path |
-| `--epochs` | 50 | Training epochs |
-| `--batch_size` | 4 | Batch size |
-| `--lr_start` | 0.001 | Initial learning rate |
-| `--num_folds` | 5 | Cross-validation folds |
-| `--gpu` | 0 | GPU device ID |
+| `--model_name` | `MACTFusion` | Model architecture |
+| `--exp_name` | `SPECT-MRI` | Dataset / fusion task |
+| `--method` | `MACTFusion` | Save directory name |
+| `--data_dir` | *required* | Path to dataset root |
+| `--epochs` | `50` | Training epochs |
+| `--batch_size` | `4` | Batch size per GPU |
+| `--lr_start` | `0.001` | Initial learning rate |
+| `--lr_decay_type` | `step` | `step` / `cosine` / `plateau` / `poly` |
+| `--optimizer` | `adam` | `adam` / `adamw` / `sgd` |
+| `--num_folds` | `5` | K-fold cross-validation |
+| `--gpu` | `0` | GPU device ID |
 
 ---
 
@@ -152,9 +164,10 @@ PRFusion/
 
 ```bibtex
 @article{PRFusion2025,
-  title={PRFusion: Progressive RWKV-based Fusion Network for Multi-Modal Medical Image Fusion},
-  journal={Applied Soft Computing},
-  note={Under review}
+  title   = {PRFusion: Progressive RWKV-based Fusion Network
+             for Multi-Modal Medical Image Fusion},
+  journal = {Applied Soft Computing},
+  note    = {Under review}
 }
 ```
 
@@ -162,13 +175,13 @@ PRFusion/
 
 ## License
 
-MIT License.
+MIT.
 
 <div align="center">
 
 ```
 ╔══════════════════════════════════════════════════════════════╗
-║  Made with ❤️  for the Medical Image Analysis Community      ║
+║       Made with ❤️  for the Medical Image Community           ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
