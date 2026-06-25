@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+logs/
+models/
+results/
+logs_fewshot/
+models_fewshot/
+results_fewshot/
+*.log
+*.pth
+.idea/
+.vscode/
