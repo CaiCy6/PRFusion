@@ -14,12 +14,7 @@ import warnings
 from datetime import datetime
 
 from dataset import Fusion_dataset
-from Fusionnet import MACTFusion
 from Networks.FusionNet import UNetFusionModel as PRFusion
-from Networks.OursA1 import UNetFusionModel as PRFusionA1
-from Networks.OursA2 import UNetFusionModel as PRFusionA2
-from Networks.OursA3 import UNetFusionModel as PRFusionA3
-from Networks.OursA4 import UNetFusionModel as PRFusionA4
 from eval_metrics import (
     mutual_information, mean_squared_error, correlation_coefficient,
     peak_signal_noise_ratio, perceptual_quality, visual_information_fidelity,
@@ -29,19 +24,14 @@ from eval_metrics import (
 warnings.filterwarnings('ignore')
 
 MODEL_REGISTRY = {
-    'MACTFusion': MACTFusion,
     'PRFusion': PRFusion,
-    'PRFusionA1': PRFusionA1,
-    'PRFusionA2': PRFusionA2,
-    'PRFusionA3': PRFusionA3,
-    'PRFusionA4': PRFusionA4,
 }
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description='PRFusion: Medical Image Fusion Testing')
 
-    parser.add_argument('--model_name', '-M', type=str, default='MACTFusion',
+    parser.add_argument('--model_name', '-M', type=str, default='PRFusion',
                         choices=list(MODEL_REGISTRY.keys()))
     parser.add_argument('--output_channels', '-oc', type=int, default=1)
 

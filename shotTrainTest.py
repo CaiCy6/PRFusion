@@ -15,7 +15,6 @@ from torch.utils.data import DataLoader
 from torch.optim.lr_scheduler import StepLR, CosineAnnealingLR, ReduceLROnPlateau
 
 from logger import setup_logger
-from Fusionnet import MACTFusion
 from Networks.FusionNet import UNetFusionModel as PRFusion
 from loss import Fusionloss
 
@@ -28,7 +27,6 @@ import pandas as pd
 warnings.filterwarnings('ignore')
 
 MODEL_REGISTRY = {
-    'MACTFusion': MACTFusion,
     'PRFusion': PRFusion,
 }
 
@@ -313,7 +311,7 @@ def parse_args():
     parser.add_argument('--train_ratio', '-tr', type=float, required=True,
                         choices=[0.1, 0.3, 0.5],
                         help='Training data ratio (0.1=10%, 0.3=30%, 0.5=50%)')
-    parser.add_argument('--model_name', '-M', type=str, default='MACTFusion',
+    parser.add_argument('--model_name', '-M', type=str, default='PRFusion',
                         choices=list(MODEL_REGISTRY.keys()))
     parser.add_argument('--output_channels', '-oc', type=int, default=1)
     parser.add_argument('--batch_size', '-B', type=int, default=2)
@@ -329,7 +327,7 @@ def parse_args():
     parser.add_argument('--gpu', '-G', type=int, default=0)
     parser.add_argument('--num_workers', '-j', type=int, default=4)
     parser.add_argument('--seed', '-s', type=int, default=42)
-    parser.add_argument('--method', '-method', type=str, default='MACTFusion')
+    parser.add_argument('--method', '-method', type=str, default='PRFusion')
     parser.add_argument('--exp_name', '-exp', type=str, default='SPECT-MRI',
                         choices=['CT-MRI', 'PET-MRI', 'SPECT-MRI'])
     parser.add_argument('--data_dir', type=str, required=True,

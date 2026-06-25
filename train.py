@@ -15,30 +15,20 @@ from torch.optim.lr_scheduler import StepLR, CosineAnnealingLR, ReduceLROnPlatea
 
 from dataset import Fusion_dataset
 from logger import setup_logger
-from Fusionnet import MACTFusion
 from Networks.FusionNet import UNetFusionModel as PRFusion
-from Networks.OursA1 import UNetFusionModel as PRFusionA1
-from Networks.OursA2 import UNetFusionModel as PRFusionA2
-from Networks.OursA3 import UNetFusionModel as PRFusionA3
-from Networks.OursA4 import UNetFusionModel as PRFusionA4
 from loss import Fusionloss
 
 warnings.filterwarnings('ignore')
 
 MODEL_REGISTRY = {
-    'MACTFusion': MACTFusion,
     'PRFusion': PRFusion,
-    'PRFusionA1': PRFusionA1,
-    'PRFusionA2': PRFusionA2,
-    'PRFusionA3': PRFusionA3,
-    'PRFusionA4': PRFusionA4,
 }
 
 
 def parse_args():
     parser = argparse.ArgumentParser(description='PRFusion: Medical Image Fusion Training')
 
-    parser.add_argument('--model_name', '-M', type=str, default='MACTFusion',
+    parser.add_argument('--model_name', '-M', type=str, default='PRFusion',
                         choices=list(MODEL_REGISTRY.keys()),
                         help='Model name')
     parser.add_argument('--output_channels', '-oc', type=int, default=1,

@@ -92,13 +92,7 @@ python shotTrainTest.py \
 
 ---
 
-## 🧪 Available Models & Tasks
-
-| Model | Description |
-|:------|:------------|
-| `MACTFusion` | Lightweight cross-transformer baseline |
-| `PRFusion` | Proposed RWKV-based U-Net |
-| `PRFusionA1` ~ `PRFusionA4` | Ablation study variants |
+## 🧪 Supported Tasks
 
 | Task | Modalities |
 |:-----|:-----------|
@@ -135,12 +129,8 @@ PRFusion/
 ├── shotTrainTest.py         # Few-shot training + testing
 ├── dataset.py / loss.py     # Data & loss functions
 ├── eval_metrics.py          # MI, SSIM, PSNR, VIF, Qabf, SCD
-├── Fusionnet.py             # MACTFusion baseline
-├── CrossMaxvit.py           # MaxViT backbone
-├── Maxvit.py                # MaxViT backbone
 ├── Networks/
-│   ├── FusionNet.py         # PRFusion (proposed)
-│   ├── OursA1.py ~ A4.py    # Ablation variants
+│   ├── FusionNet.py         # PRFusion
 │   └── OursFusionNet/       # RWKV 2D modules + CUDA kernels
 ├── scripts/                 # Shell scripts
 └── requirements.txt
