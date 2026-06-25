@@ -27,36 +27,21 @@
 
 ---
 
-## Overview
-
-PRFusion is a multi-modal medical image fusion framework supporting **CT-MRI**, **PET-MRI**, and **SPECT-MRI** fusion tasks. It operates in the YCrCb color space and supports both standard and few-shot training with 5-fold cross-validation.
+> 📄 This work has been submitted to **Applied Soft Computing (ASOC)**.
 
 ---
 
-## Project Structure
+## Architecture
 
-```
-PRFusion/
-├── README.md
-├── requirements.txt
-├── train.py                     # Training with 5-fold CV
-├── test.py                      # Evaluation & metrics
-├── shotTrainTest.py             # Few-shot training + testing
-├── dataset.py                   # Data loader (K-Fold)
-├── loss.py                      # Fusion loss
-├── eval_metrics.py              # MI, SSIM, PSNR, VIF, Qabf, SCD
-├── logger.py                    # Logging utilities
-├── Fusionnet.py                 # MACTFusion model
-├── CrossMaxvit.py / Maxvit.py   # Vision backbone components
-├── Networks/
-│   ├── FusionNet.py             # PRFusion (proposed)
-│   ├── OursA1.py ~ OursA4.py    # Ablation variants
-│   └── OursFusionNet/           # RWKV & CUDA kernels
-└── scripts/
-    ├── train.sh
-    ├── train_ablation.sh
-    └── train_fewshot.sh
-```
+<div align="center">
+  <img src="Arch.png" alt="PRFusion Architecture" width="85%">
+</div>
+
+---
+
+## Overview
+
+PRFusion is a multi-modal medical image fusion framework for **CT-MRI**, **PET-MRI**, and **SPECT-MRI** tasks. It supports standard training with 5-fold cross-validation and few-shot experiments.
 
 ---
 
@@ -72,29 +57,21 @@ pip install -r requirements.txt
 
 ### Dataset
 
-Organize the [Harvard Medical Image Fusion Dataset](https://www.med.harvard.edu/AANLIB/home.html) as:
-
 ```
 Havard-Medical-Image-Fusion-Datasets-main/
-├── CT-MRI/
-│   ├── CT/        # *.png
-│   └── MRI/       # *.png
-├── PET-MRI/
-│   ├── PET/       # *.png
-│   └── MRI/       # *.png
-└── SPECT-MRI/
-    ├── SPECT/     # *.png
-    └── MRI/       # *.png
+├── CT-MRI/   {CT/*.png, MRI/*.png}
+├── PET-MRI/  {PET/*.png, MRI/*.png}
+└── SPECT-MRI/{SPECT/*.png, MRI/*.png}
 ```
 
-### Training
+### Train
 
 ```bash
 python train.py \
     --model_name PRFusion \
     --method PRFusion \
     --exp_name CT-MRI \
-    --data_dir /path/to/Havard-Medical-Image-Fusion-Datasets-main \
+    --data_dir /path/to/dataset \
     --epochs 50 --batch_size 4 --gpu 0
 ```
 
@@ -102,14 +79,14 @@ python train.py \
 
 **Datasets:** `CT-MRI` | `PET-MRI` | `SPECT-MRI`
 
-### Testing
+### Test
 
 ```bash
 python test.py \
     --model_name PRFusion \
     --method PRFusion \
     --exp_name CT-MRI \
-    --data_dir /path/to/Havard-Medical-Image-Fusion-Datasets-main \
+    --data_dir /path/to/dataset \
     --gpu 0
 ```
 
@@ -121,23 +98,38 @@ python shotTrainTest.py \
     --model_name PRFusion \
     --method PRFusion \
     --exp_name CT-MRI \
-    --data_dir /path/to/Havard-Medical-Image-Fusion-Datasets-main \
+    --data_dir /path/to/dataset \
     --epochs 30 --gpu 0
 ```
 
 ---
 
-## Evaluation Metrics
+## Project Structure
 
-| Metric | Description |
-|:------:|:------------|
-| MI | Mutual Information |
-| CC | Correlation Coefficient |
-| PSNR | Peak Signal-to-Noise Ratio |
-| SSIM | Structural Similarity |
-| VIFF | Visual Information Fidelity |
-| SCD | Sum of Correlation Differences |
-| Qabf | Quality of Blended Images |
+```
+PRFusion/
+├── Arch.png                     # Architecture diagram
+├── README.md
+├── requirements.txt
+├── train.py                     # Training with 5-fold CV
+├── test.py                      # Evaluation & metrics
+├── shotTrainTest.py             # Few-shot training + testing
+├── dataset.py                   # Data loader
+├── loss.py                      # Fusion loss
+├── eval_metrics.py              # Evaluation metrics
+├── logger.py                    # Logging
+├── Fusionnet.py                 # MACTFusion model
+├── CrossMaxvit.py               # Vision backbone
+├── Maxvit.py                    # Vision backbone
+├── Networks/
+│   ├── FusionNet.py             # PRFusion (proposed)
+│   ├── OursA1.py ~ OursA4.py    # Ablation variants
+│   └── OursFusionNet/           # RWKV 2D blocks & CUDA kernels
+└── scripts/
+    ├── train.sh
+    ├── train_ablation.sh
+    └── train_fewshot.sh
+```
 
 ---
 
@@ -145,13 +137,13 @@ python shotTrainTest.py \
 
 | Argument | Default | Description |
 |:---------|:-------:|:------------|
-| `--model_name` | MACTFusion | Model to use |
+| `--model_name` | MACTFusion | Model selection |
 | `--exp_name` | SPECT-MRI | Dataset / task |
-| `--data_dir` | (required) | Path to dataset root |
+| `--data_dir` | required | Dataset root path |
 | `--epochs` | 50 | Training epochs |
 | `--batch_size` | 4 | Batch size |
 | `--lr_start` | 0.001 | Initial learning rate |
-| `--num_folds` | 5 | K-fold cross-validation |
+| `--num_folds` | 5 | Cross-validation folds |
 | `--gpu` | 0 | GPU device ID |
 
 ---
@@ -161,10 +153,8 @@ python shotTrainTest.py \
 ```bibtex
 @article{PRFusion2025,
   title={PRFusion: Progressive RWKV-based Fusion Network for Multi-Modal Medical Image Fusion},
-  author={},
-  journal={},
-  year={2025},
-  publisher={}
+  journal={Applied Soft Computing},
+  note={Under review}
 }
 ```
 
