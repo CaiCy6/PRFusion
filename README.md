@@ -1,50 +1,41 @@
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/PyTorch-1.12+-EE4C2C?style=flat&logo=pytorch&logoColor=white" alt="PyTorch">
-  <img src="https://img.shields.io/badge/CUDA-11.6+-76B900?style=flat&logo=nvidia&logoColor=white" alt="CUDA">
-  <img src="https://img.shields.io/badge/License-MIT-97CA00?style=flat&logo=open-source-initiative&logoColor=white" alt="License">
-</p>
+<div align="center">
 
-<h1 align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)">
-    <img src="Arch.png" alt="PRFusion" width="75%">
-  </picture>
-</h1>
+[![Python](https://img.shields.io/badge/Python-3.8+-blue?logo=python)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-ee4c2c?logo=pytorch)](https://pytorch.org/)
+[![CUDA](https://img.shields.io/badge/CUDA-11.6+-76b900?logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-```
-╔══════════════════════════════════════════════════════════════════════════════╗
-║                                                                              ║
-║                              ██████╗ ██████╗ ███████╗                        ║
-║                              ██╔══██╗██╔══██╗██╔════╝                        ║
-║                              ██████╔╝██████╔╝█████╗                          ║
-║                              ██╔═══╝ ██╔══██╗██╔══╝                          ║
-║                              ██║     ██║  ██║██║                             ║
-║                              ╚═╝     ╚═╝  ╚═╝╚═╝                             ║
-║                                                                              ║
-║              Progressive RWKV-based Fusion Network for                       ║
-║              Multi-Modal Medical Image Fusion                                ║
-║                                                                              ║
-╚══════════════════════════════════════════════════════════════════════════════╝
-```
+</div>
+
+<br>
+
+<div align="center">
+  <img src="Arch.png" alt="PRFusion Architecture" width="90%">
+</div>
+
+<br>
+
+# PRFusion: Progressive RWKV-based Fusion Network for Multi-Modal Medical Image Fusion
 
 <div align="center">
 
-> 📄 Submitted to **Applied Soft Computing** (ASOC) — Under Review
+**Submitted to Applied Soft Computing (ASOC)**
 
 </div>
 
 ---
 
-## Overview
+## 🔥 News
 
-PRFusion is a deep learning framework for multi-modal medical image fusion, covering **CT-MRI**, **PET-MRI**, and **SPECT-MRI** tasks. It supports full training with 5-fold cross-validation as well as few-shot experiments.
+- **[2025.06]** We release the complete training & evaluation code.
+- **[2025.06]** Pre-trained weights for CT-MRI, PET-MRI, and SPECT-MRI are available.
+- **[2025.05]** Paper submitted to *Applied Soft Computing*.
 
 ---
 
-## Quick Start
+## ⚡ Quick Start
 
-### Installation
+### Environment
 
 ```bash
 git clone https://github.com/CaiCy6/PRFusion.git
@@ -52,49 +43,38 @@ cd PRFusion
 pip install -r requirements.txt
 ```
 
-> 🔧 The CUDA WKV kernel compiles automatically on first run (`nvcc` required).
+CUDA WKV kernels compile on first run (`nvcc` required).
 
-### Dataset Preparation
+### Dataset
 
-Download the [Harvard Medical Image Fusion Dataset](https://www.med.harvard.edu/AANLIB/home.html) and organize as:
+Download the [Harvard Medical Image Fusion Dataset](https://www.med.harvard.edu/AANLIB/home.html):
 
 ```
 Havard-Medical-Image-Fusion-Datasets-main/
-├── CT-MRI/
-│   ├── CT/        (*.png)
-│   └── MRI/       (*.png)
-├── PET-MRI/
-│   ├── PET/       (*.png)
-│   └── MRI/       (*.png)
-└── SPECT-MRI/
-    ├── SPECT/     (*.png)
-    └── MRI/       (*.png)
+├── CT-MRI/    {CT/*.png,  MRI/*.png}
+├── PET-MRI/   {PET/*.png, MRI/*.png}
+└── SPECT-MRI/ {SPECT/*.png, MRI/*.png}
 ```
 
-### Training
+### Train
 
 ```bash
 python train.py \
-    --model_name PRFusion \
-    --method PRFusion \
-    --exp_name CT-MRI \
-    --data_dir /path/to/Havard-Medical-Image-Fusion-Datasets-main \
+    --model_name  PRFusion \
+    --method      PRFusion \
+    --exp_name    CT-MRI \
+    --data_dir    /path/to/dataset \
     --epochs 50 --batch_size 4 --gpu 0
 ```
 
-| Option | Choices |
-|:-------|:--------|
-| `--model_name` | `MACTFusion` \| `PRFusion` \| `PRFusionA1` ~ `PRFusionA4` |
-| `--exp_name`   | `CT-MRI` \| `PET-MRI` \| `SPECT-MRI` |
-
-### Testing
+### Test
 
 ```bash
 python test.py \
     --model_name PRFusion \
-    --method PRFusion \
-    --exp_name CT-MRI \
-    --data_dir /path/to/dataset \
+    --method     PRFusion \
+    --exp_name   CT-MRI \
+    --data_dir   /path/to/dataset \
     --gpu 0
 ```
 
@@ -103,64 +83,74 @@ python test.py \
 ```bash
 python shotTrainTest.py \
     --train_ratio 0.1 \
-    --model_name PRFusion \
-    --method PRFusion \
-    --exp_name CT-MRI \
-    --data_dir /path/to/dataset \
+    --model_name  PRFusion \
+    --method      PRFusion \
+    --exp_name    CT-MRI \
+    --data_dir    /path/to/dataset \
     --epochs 30 --gpu 0
 ```
 
 ---
 
-## Project Structure
+## 🧪 Available Models & Tasks
+
+| Model | Description |
+|:------|:------------|
+| `MACTFusion` | Lightweight cross-transformer baseline |
+| `PRFusion` | Proposed RWKV-based U-Net |
+| `PRFusionA1` ~ `PRFusionA4` | Ablation study variants |
+
+| Task | Modalities |
+|:-----|:-----------|
+| `CT-MRI` | CT ↔ MRI |
+| `PET-MRI` | PET ↔ MRI |
+| `SPECT-MRI` | SPECT ↔ MRI |
+
+---
+
+## 📊 Evaluation
+
+The following metrics are computed per image and averaged across 5 folds:
+
+**MI** · **MSE** · **CC** · **PSNR** · **SSIM** · **VIFF** · **SCD** · **Qabf**
+
+Results are saved as:
+
+```
+results/{task}/{model}/
+├── fold_0/{fused_images/, metrics.csv}
+├── folds_summary.csv
+└── method_statistics.txt
+```
+
+---
+
+## 📁 Project Structure
 
 ```
 PRFusion/
-├── Arch.png
-├── README.md
-├── requirements.txt
-├── train.py                     # 5-fold CV training
-├── test.py                      # Evaluation & metrics
-├── shotTrainTest.py             # Few-shot training + testing
-├── dataset.py                   # Data loader
-├── loss.py                      # Fusion loss functions
-├── eval_metrics.py              # MI, SSIM, PSNR, VIF, Qabf, SCD
-├── logger.py
-├── Fusionnet.py                 # MACTFusion baseline
-├── CrossMaxvit.py               # MaxViT cross-attention blocks
-├── Maxvit.py                    # MaxViT blocks
+├── Arch.png                 # Architecture diagram
+├── train.py                 # 5-fold CV training
+├── test.py                  # Evaluation & metrics
+├── shotTrainTest.py         # Few-shot training + testing
+├── dataset.py / loss.py     # Data & loss functions
+├── eval_metrics.py          # MI, SSIM, PSNR, VIF, Qabf, SCD
+├── Fusionnet.py             # MACTFusion baseline
+├── CrossMaxvit.py           # MaxViT backbone
+├── Maxvit.py                # MaxViT backbone
 ├── Networks/
-│   ├── FusionNet.py             # PRFusion (proposed)
-│   ├── OursA1.py ~ OursA4.py    # Ablation variants
-│   └── OursFusionNet/           # RWKV 2D modules & CUDA kernels
-│       └── cuda/                # WKV forward/backward operators
-└── scripts/
-    ├── train.sh
-    ├── train_ablation.sh
-    └── train_fewshot.sh
+│   ├── FusionNet.py         # PRFusion (proposed)
+│   ├── OursA1.py ~ A4.py    # Ablation variants
+│   └── OursFusionNet/       # RWKV 2D modules + CUDA kernels
+├── scripts/                 # Shell scripts
+└── requirements.txt
 ```
 
 ---
 
-## Key Arguments
+## 📝 Citation
 
-| Argument | Default | Description |
-|:---------|:-------:|:------------|
-| `--model_name` | `MACTFusion` | Model architecture |
-| `--exp_name` | `SPECT-MRI` | Dataset / fusion task |
-| `--method` | `MACTFusion` | Save directory name |
-| `--data_dir` | *required* | Path to dataset root |
-| `--epochs` | `50` | Training epochs |
-| `--batch_size` | `4` | Batch size per GPU |
-| `--lr_start` | `0.001` | Initial learning rate |
-| `--lr_decay_type` | `step` | `step` / `cosine` / `plateau` / `poly` |
-| `--optimizer` | `adam` | `adam` / `adamw` / `sgd` |
-| `--num_folds` | `5` | K-fold cross-validation |
-| `--gpu` | `0` | GPU device ID |
-
----
-
-## Citation
+If you find this work useful, please cite:
 
 ```bibtex
 @article{PRFusion2025,
@@ -173,16 +163,6 @@ PRFusion/
 
 ---
 
-## License
+## 📄 License
 
-MIT.
-
-<div align="center">
-
-```
-╔══════════════════════════════════════════════════════════════╗
-║       Made with ❤️  for the Medical Image Community           ║
-╚══════════════════════════════════════════════════════════════╝
-```
-
-</div>
+This project is released under the [MIT License](LICENSE).
