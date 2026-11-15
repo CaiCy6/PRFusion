@@ -4,6 +4,7 @@
 [![PyTorch](https://img.shields.io/badge/PyTorch-1.12+-ee4c2c?logo=pytorch)](https://pytorch.org/)
 [![CUDA](https://img.shields.io/badge/CUDA-11.6+-76b900?logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![DOI](https://img.shields.io/badge/DOI-10.1016%2Fj.asoc.2026.116704-blue)](https://doi.org/10.1016/j.asoc.2026.116704)
 
 </div>
 
@@ -15,11 +16,14 @@
 
 <br>
 
-# PRFusion: Progressive RWKV-based Fusion Network for Multi-Modal Medical Image Fusion
+# PRFusion: A Progressive Receptance Weighted Key Value Network for Multimodal Medical Image Fusion
 
 <div align="center">
 
-**Submitted to Applied Soft Computing (ASOC)**
+**Published in Applied Soft Computing (ASOC)**
+Volume 204, Part E, Article 116704 · January 2027
+
+[![ScienceDirect](https://img.shields.io/badge/ScienceDirect-10.1016%2Fj.asoc.2026.116704-red?style=flat-square)](https://www.sciencedirect.com/science/article/pii/S1568494626021526)
 
 </div>
 
@@ -27,9 +31,34 @@
 
 ## 🔥 News
 
+- **[2026.11]** Paper accepted & published in *Applied Soft Computing* — **Volume 204, Part E, Article 116704** (January 2027).
 - **[2025.06]** We release the complete training & evaluation code.
 - **[2025.06]** Pre-trained weights for CT-MRI, PET-MRI, and SPECT-MRI are available.
 - **[2025.05]** Paper submitted to *Applied Soft Computing*.
+
+---
+
+## 📄 Paper & How to Get It
+
+**Official title:** *A progressive receptance weighted key value network for multimodal medical image fusion*
+**Authors:** Yang Zhou, Yifan Wang, Hongyu Cai
+
+| Resource | Link |
+|:--|:--|
+| DOI | https://doi.org/10.1016/j.asoc.2026.116704 |
+| ScienceDirect (article page) | https://www.sciencedirect.com/science/article/pii/S1568494626021526 |
+| ScienceDirect (abstract) | https://www.sciencedirect.com/science/article/abs/pii/S1568494626021526 |
+| Volume 204, Part E — Table of contents | https://www.sciencedirect.com/journal/applied-soft-computing/vol/204/part/PE |
+| **Code (this repository)** | https://github.com/CaiCy6/PRFusion |
+
+**Full-text access** — the article is published in a subscription journal (not Open Access), so the PDF is obtained via one of:
+
+1. **Institutional access** — sign in with your organisation on the [ScienceDirect article page](https://www.sciencedirect.com/science/article/pii/S1568494626021526) (*"Get full-text access by signing in with your organisation"*). If your university / hospital / library subscribes to Elsevier, this works directly.
+2. **Elsevier TDM** — machine-readable full text via the [Elsevier API](https://api.elsevier.com/content/article/PII:S1568494626021526) (requires an API key; also subject to the publisher's TDM licence).
+3. **Elsevier / ScienceDirect article purchase** — one-off access via the publisher's paywall page on the article page.
+4. **Abstract + highlights (free)** — the abstract, highlights and section snippets are openly readable on the abstract page; the full PDF requires any of the above.
+
+> The **code, pre-trained weights and evaluation scripts in this repository are free and MIT-licensed** — no subscription needed to reproduce the results.
 
 ---
 
@@ -143,11 +172,15 @@ PRFusion/
 If you find this work useful, please cite:
 
 ```bibtex
-@article{PRFusion2025,
-  title   = {PRFusion: Progressive RWKV-based Fusion Network
-             for Multi-Modal Medical Image Fusion},
+@article{zhou2026prfusion,
+  title   = {A progressive receptance weighted key value network for multimodal medical image fusion},
+  author  = {Zhou, Yang and Wang, Yifan and Cai, Hongyu},
   journal = {Applied Soft Computing},
-  note    = {Under review}
+  year    = {2027},
+  volume  = {204},
+  pages   = {116704},
+  doi     = {10.1016/j.asoc.2026.116704},
+  url     = {https://doi.org/10.1016/j.asoc.2026.116704}
 }
 ```
 
