@@ -18,6 +18,9 @@
 
 # PRFusion: A Progressive Receptance Weighted Key Value Network for Multimodal Medical Image Fusion
 
+> **医学图像融合模型** —— 基于 RWKV（Receptance Weighted Key Value）架构的渐进式跨模态融合网络，支持 CT-MRI / PET-MRI / SPECT-MRI 多模态融合。
+> 论文已发表于 *Applied Soft Computing*（Vol. 204, Part E, Article 116704, 2027）。
+
 <div align="center">
 
 **Published in Applied Soft Computing (ASOC)**
